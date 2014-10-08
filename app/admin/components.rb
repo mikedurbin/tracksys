@@ -133,7 +133,7 @@ ActiveAdmin.register Component do
     div :class => "columns-none" do
       if ! component.children.empty?
         panel "Child Component Information", :toggle => 'show' do
-          table_for component.children.select(:id).select(:date).select(:title).select(:content_desc).select(:ancestry).select(:seq_number).order(:seq_number) do
+          table_for component.subtree.select(:id).select(:date).select(:title).select(:content_desc).select(:ancestry).select(:seq_number).order(:ancestry, :seq_number) do
             column "#", :seq_number
             column :id
             column :date
@@ -146,6 +146,9 @@ ActiveAdmin.register Component do
               end
             end
             column :master_files do |child| link_to "#{child.descendant_master_file_count}", admin_master_files_path(:q => {:component_id_eq => child.id}) end
+            column :own_master_files do |child|  "#{child.master_files.size}" end
+            column :own_children do |child| child.children.size end
+            column :ancestry
           end
         end
       else        
