@@ -41,7 +41,9 @@ Tracksys::Application.configure do
 #  Fedora_apia_wsdl = 'http://tracksysdev.lib.virginia.edu:8080/fedora/wsdl?api=API-A'
 #  Fedora_username = 'fedoraAdmin'
 #  Fedora_password = 'fedoraAdmin'
- FEDORA_REST_URL = 'http://tracksysdev.lib.virginia.edu:8080/fedora'
+FEDORA_REST_URL = 'http://tracksysdev.lib.virginia.edu:8080/fedora'
+
+
  FEDORA_PROXY_URL = FEDORA_REST_URL 
  SOLR_URL = "http://tracksysdev.lib.virginia.edu:8080/solr/tracksys"
  STAGING_SOLR_URL= SOLR_URL # dev
@@ -52,13 +54,32 @@ Tracksys::Application.configure do
 #  TRACKSYS_URL_METADATA = "http://tracksysdev.lib.virginia.edu/metadata"
 #  DELIVERY_DIR = "/digiserv-delivery-test"
 #  TEI_ACCESS_URL = "http://xtf.lib.virginia.edu/xtf/view"
+
+
+## production values for laptop development env (sdm7g)
+  Fedora_username = 'tracksysProd'
+  Fedora_password = 'aro2def'
+  FEDORA_REST_URL = 'http://fedora-prod02.lib.virginia.edu:8080/fedora'
+  FEDORA_PROXY_URL = 'http://fedoraproxy.lib.virginia.edu/fedora'
+  SOLR_URL = "http://libsvr25.lib.virginia.edu:8080/solr/tracksys"
+  STAGING_SOLR_URL = "http://libsvr25.lib.virginia.edu:8080/solr/tracksys"
+  TRACKSYS_URL = "http://tracksys.lib.virginia.edu/"
+##  local laptop development (full)
+  Fedora_username = 'fedoraAdmin'
+  Fedora_password = 'fedoraAdmin'
+  FEDORA_REST_URL = 'http://localhost:8080/fedora'
+  FEDORA_PROXY_URL = FEDORA_REST_URL
+  SOLR_URL = "http://localhost:8080/solr/tracksys"
+  STAGING_SOLR_URL = SOLR_URL
+  TRACKSYS_URL = "http://localhost:3000/" 
+##
   
   # Set the number of threads dedicated to JP2K creation.
   NUM_JP2K_THREADS = 1
 
 config.after_initialize do
-  PRODUCTION_MOUNT = "/sandbox/digiserv-production"
-  MIGRATION_MOUNT = "/sandbox/digiserv-migration"
+#  PRODUCTION_MOUNT = "/sandbox/digiserv-production"	
+#  MIGRATION_MOUNT = "/sandbox/digiserv-migration"
 
   ADMINISTRATIVE_DIR_PRODUCTION = "#{PRODUCTION_MOUNT}/administrative"
   IVIEW_CATALOG_EXPORT_DIR = "#{ADMINISTRATIVE_DIR_PRODUCTION}/EAD2iViewXML"
@@ -69,6 +90,7 @@ config.after_initialize do
   BASE_DESTINATION_PATH_DL  = "/tmp/30_process_deliverables"
   # Saxon Servelet for Transformations
   SAXON_URL = "tracksysdev.lib.virginia.edu"
+  SAXON_URL = "localhost" # sdm7g 
   SAXON_PORT = "8080"
 end
 
